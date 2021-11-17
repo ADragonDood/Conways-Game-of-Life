@@ -20,18 +20,42 @@ body {
     display: inline-flex;
     height: 10px;
     width: 10px;
-    outline: 1px dashed darkgray;
+    outline: 1px solid darkgray;
+}
+
+.alive {
+    background-color: black;
+}
+
+.dead {
+    background-color: white;
 }
 
 #grid {
-    margin: 50px;
-    height: 86.5vh;
+    margin: 10px;
     width: 100vw;
     border: 5px solid black;
     overflow: hidden;
 }
 
-.btn-container {
-    margin: 10px;
-    height: 40px;
+.container {
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px;
+    border: 2px solid black;
+}
+
+.btn {
+    width: 100%;
+    background-color: black; 
+    color: white;
+}
+
+.btns {
+    padding: 5px;
+    border: 2px dashed black;
+}
+
+.presets {
+    text-align: center;
 }
