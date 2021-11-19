@@ -6,6 +6,7 @@
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     display: flex;
     height: 100vh;
@@ -34,6 +35,7 @@ body {
 #grid {
     margin: 10px;
     width: 100vw;
+    height: 96.3vh;
     border: 5px solid black;
     overflow: hidden;
 }
@@ -51,11 +53,16 @@ body {
     color: white;
 }
 
-.btns {
+.options {
     padding: 5px;
     border: 2px dashed black;
 }
 
 .presets {
+    text-align: center;
+}
+
+.range {
+    margin-top: 5px;
     text-align: center;
 }

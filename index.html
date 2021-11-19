@@ -8,11 +8,22 @@
     </head>
     <body>
         <div class="container">
-            <div class="btns">
+            <div class="options">
                 <button class="btn" type="button" onclick="Start()">Start</button>
                 <button class="btn" type="button" onclick="Pause()">Pause</button>
                 <button class="btn" type="button" onclick="Clear()">Clear</button>
                 <button class="btn" type="button" onclick="loadCachedPositions(cachedPositions)">Reload Positions</button>
+                <button class="btn" type="button" onclick="createGrid()">Reload Grid</button>
+                <div class="symmetry">
+                    <br>
+                    <input id="vertical-sym" type="checkbox"> Horizontal Symmetry<br>
+                    <input id="horizontal-sym" type="checkbox"> Vertical Symmetry
+                </div>
+                <div class="range">
+                    <br>
+                    <label>Clock Speed</label><br>
+                    <input type="range" id="clock-speed-rng" min="0" max="1000"><p id="rng-text"></p>
+                </div>
             </div><br>
             <div class="presets">
                 <h2><u>Presets</u></h2>
