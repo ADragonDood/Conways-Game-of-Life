@@ -3,6 +3,7 @@ var cachedPositions = []
 var clockSpeed;
 var dragList = []
 var grid = document.getElementById("grid")
+var programStarted = false;
 
 let rngText = document.getElementById('rng-text')
 let rngInput = document.getElementById('clock-speed-rng')
@@ -15,6 +16,10 @@ rngInput.addEventListener("input", () => {
 
 rngInput.addEventListener("change", () => {
     clockSpeed = parseInt(rngInput.value)
+    if (programStarted == true) {
+        clearInterval(repeat)
+        repeat = setInterval(checkCell, clockSpeed)   
+    }
 })
 
 function getNeighbours(cellPosInRow, cellRow) {
@@ -148,6 +153,8 @@ function Clear() {
         cell.className = "cell dead"
     })
 
+    programStarted = false
+
     clearInterval(repeat)
 }
 
@@ -162,6 +169,7 @@ function loadCachedPositions(cachedPositions) {
 }
 
 function Pause() {
+    programStarted = false
     clearInterval(repeat)
 }
 
@@ -175,6 +183,7 @@ function Start() {
         }
     })
 
+    programStarted = true
     repeat = setInterval(checkCell, clockSpeed)
 }
 
