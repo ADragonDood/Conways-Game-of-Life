@@ -1,5 +1,21 @@
 var repeat
 var cachedPositions = []
+var clockSpeed;
+var dragList = []
+var grid = document.getElementById("grid")
+
+let rngText = document.getElementById('rng-text')
+let rngInput = document.getElementById('clock-speed-rng')
+rngText.innerText = rngInput.value
+clockSpeed = parseInt(rngInput.value)
+
+rngInput.addEventListener("input", () => {
+    rngText.innerText = rngInput.value
+})
+
+rngInput.addEventListener("change", () => {
+    clockSpeed = parseInt(rngInput.value)
+})
 
 function getNeighbours(cellPosInRow, cellRow) {
     let leftNeighbour = document.getElementById("cell-" + (cellPosInRow - 1) + "-row-" + cellRow)
@@ -15,7 +31,10 @@ function getNeighbours(cellPosInRow, cellRow) {
 }
 
 function createGrid() {
-    let grid = document.getElementById("grid");
+
+    if (grid.innerHTML != "") {
+        grid.innerHTML = ""
+    }
 
     for (let i = 0; i < (grid.clientHeight/10)-1; i++) {
         let rowObj = document.createElement("div");
@@ -33,13 +52,84 @@ function createGrid() {
             cellObj.id = "cell-"+j+"-row-"+i;
             cellObj.setAttribute("value", "dead");
             cellObj.setAttribute("onclick", "setState(this);");
+            cellObj.setAttribute("ondragover", "addToDragList(this);")
+            cellObj.setAttribute("ondragstart", "clearList();")
+            cellObj.setAttribute("ondragend", "setDraggedCellsState();")
+            cellObj.draggable = true
 
             row.appendChild(cellObj)
         }
     }
 }
 
+function setDraggedCellsState() {
+    dragList.forEach(cell => {
+        setState(cell)
+    })
+}
+
+function clearList() {
+    dragList = []
+}
+
+function addToDragList(cell) {
+    if (!dragList.includes(cell)) {
+        dragList.push(cell)
+    }
+}
+
 function setState(cell) {
+
+    let verticalSym = document.getElementById("vertical-sym").checked
+    let horizontalSym = document.getElementById("horizontal-sym").checked
+
+    if (verticalSym == true) {
+        let cellsPerRow = document.getElementsByClassName("row")[0].childElementCount
+        let cellIdSplit = cell.id.split("-")
+        let mirroredCell = document.getElementById("cell-" + (cellsPerRow-(parseInt(cellIdSplit[1])+1))+"-row-"+cellIdSplit[3])
+
+        let value = mirroredCell.getAttribute("value")
+        if (value == "dead") {
+            mirroredCell.setAttribute("value", "alive")
+            mirroredCell.className = "cell alive"
+        } else {
+            mirroredCell.setAttribute("value", "dead")
+            mirroredCell.className = "cell dead"
+        }
+    }
+
+    if (horizontalSym == true) {
+        let rowCount = document.getElementsByClassName("row").length;
+        let cellIdSplit = cell.id.split("-")
+        let mirroredCell = document.getElementById("cell-"+(parseInt(cellIdSplit[1]))+"-row-"+(rowCount-parseInt(cellIdSplit[3])-1))
+
+        let value = mirroredCell.getAttribute("value")
+        if (value == "dead") {
+            mirroredCell.setAttribute("value", "alive")
+            mirroredCell.className = "cell alive"
+        } else {
+            mirroredCell.setAttribute("value", "dead")
+            mirroredCell.className = "cell dead"
+        }
+
+    }
+
+    if (horizontalSym == true && verticalSym == true) {
+        let rowCount = document.getElementsByClassName("row").length;
+        let cellsPerRow = document.getElementsByClassName("row")[0].childElementCount
+        let cellIdSplit = cell.id.split("-")
+        let mirroredCell = document.getElementById("cell-" + (cellsPerRow-(parseInt(cellIdSplit[1])+1))+"-row-"+(rowCount-parseInt(cellIdSplit[3])-1))
+
+        let value = mirroredCell.getAttribute("value")
+        if (value == "dead") {
+            mirroredCell.setAttribute("value", "alive")
+            mirroredCell.className = "cell alive"
+        } else {
+            mirroredCell.setAttribute("value", "dead")
+            mirroredCell.className = "cell dead"
+        }
+    }
+
     let value = cell.getAttribute("value")
     if (value == "dead") {
         cell.setAttribute("value", "alive")
@@ -85,7 +175,7 @@ function Start() {
         }
     })
 
-    repeat = setInterval(checkCell, 100)
+    repeat = setInterval(checkCell, clockSpeed)
 }
 
 function checkCell() {
