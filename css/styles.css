@@ -5,12 +5,17 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: Roboto-regular;
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     display: flex;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
+    font-family: Roboto-Regular;
 }
 
 .row {
@@ -34,8 +39,7 @@ body {
 
 #grid {
     margin: 10px;
-    width: 100vw;
-    height: 96.3vh;
+    height: 1010px;
     border: 5px solid black;
     overflow: hidden;
 }
@@ -58,11 +62,43 @@ body {
     border: 2px dashed black;
 }
 
-.presets {
+.presets-title {
     text-align: center;
+}
+
+#presets-list {
+    margin-top: 10px;
 }
 
 .range {
     margin-top: 5px;
     text-align: center;
+}
+
+.preset {
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 25px
+}
+
+.preset-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.delete-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.preset-img {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }

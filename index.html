@@ -13,11 +13,11 @@
                 <button class="btn" type="button" onclick="Pause()">Pause</button>
                 <button class="btn" type="button" onclick="Clear()">Clear</button>
                 <button class="btn" type="button" onclick="loadCachedPositions(cachedPositions)">Reload Positions</button>
-                <button class="btn" type="button" onclick="createGrid()">Reload Grid</button>
+                <button class="btn" type="button" onclick="createGrid()">Reload grid</button>
                 <div class="symmetry">
                     <br>
-                    <input id="vertical-sym" type="checkbox"> Horizontal Symmetry<br>
-                    <input id="horizontal-sym" type="checkbox"> Vertical Symmetry
+                    <input id="horizontal-sym" type="checkbox" onclick="showLineOfSymmetry()"> Horizontal Symmetry<br>
+                    <input id="vertical-sym" type="checkbox" onclick="showLineOfSymmetry()"> Vertical Symmetry
                 </div>
                 <div class="range">
                     <br>
@@ -25,11 +25,40 @@
                     <input type="range" id="clock-speed-rng" min="0" max="1000"><p id="rng-text"></p>
                 </div>
             </div><br>
-            <div class="presets">
-                <h2><u>Presets</u></h2>
+            <div class="presets-container">
+                <div class="presets-title">
+                    <h2><u>Presets</u></h2>
+                    <button class="btn" type="button" onclick="createPreset()">Create New Preset</button>
+                    <button class="btn" style="display: none;" type="button" onclick="setPresetOrigin()" id="setOrigin">Set Origin</button>
+                    <button class="btn" style="display: none;" type="button" onclick="setPresetBoundary()" id="setBoundary">Set Boundary</button>
+                    <button class="btn" style="display: none;" type="button" onclick="cancelPreset();" id="cancelPreset">Cancel Preset</button>
+                </div>
+                <div id="presets-list">
+                    <div class="preset" onclick="getPreset(this)" value="spinny_boi">
+                        <div class="preset-header">
+                            <h4>Spinny Boi</h4>
+                        </div>
+                    </div>
+                    <div class="preset" onclick="getPreset(this)" value="pulsar">
+                        <div class="preset-header">
+                            <h4>Pulsar</h4>
+                        </div>
+                    </div>
+                    <div class="preset" onclick="getPreset(this)" value="gosper_glider_gun">
+                        <div class="preset-header">
+                            <h4>Gosper Glider Gun</h4>
+                        </div>
+                    </div>
+                    <div class="preset" onclick="getPreset(this)" value="MONGOLIA">
+                        <div class="preset-header">
+                            <h4>MONGOLIA</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="grid"></div>
+        <script type="text/javascript" src="./json/data.js"></script>
         <script type="text/javascript" lang="javascript" src="./js/index.js"></script>
     </body>
 </html>
